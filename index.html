@@ -69,7 +69,7 @@
     <article id="post-week1_day4" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2020/07/09/week1_day4/" class="article-date">
-  <time datetime="2020-07-09T09:19:38.142Z" itemprop="datePublished">2020-07-09</time>
+  <time datetime="2020-07-09T09:49:55.960Z" itemprop="datePublished">2020-07-09</time>
 </a>
     
   </div>
@@ -89,14 +89,21 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h1 id="week1day4"><a href="#week1day4" class="headerlink" title="week1day4"></a>week1day4</h1><p><em>总结：按照昨日计划学习了python数据归一化、标准化、缺失值处理、处理分类型数据、连续型数据</em></p>
-<h2 id="一些知识点："><a href="#一些知识点：" class="headerlink" title="一些知识点："></a><strong>一些知识点：</strong></h2><h3 id="1-pandas-DataFrame-data"><a href="#1-pandas-DataFrame-data" class="headerlink" title="1.pandas.DataFrame(data)"></a>1.pandas.DataFrame(data)</h3><pre><code>   例：    
+<h2 id="一些知识点："><a href="#一些知识点：" class="headerlink" title="一些知识点："></a><strong>一些知识点：</strong></h2><p>###归一化</p>
+<h4 id="1-pandas-DataFrame-data"><a href="#1-pandas-DataFrame-data" class="headerlink" title="1.pandas.DataFrame(data)"></a>1.pandas.DataFrame(data)</h4><pre><code>       例：    
 data = [[-1, 2], [-0.5, 6], [0, 10], [1, 18]]
-pd.DataFrame(data)</code></pre><p>  (显示)        0   1<br>       0 -1.0   2<br>           1 -0.5   6<br>           2  0.0  10<br>           3  1.0  18</p>
-<h3 id="2-scaler-MinMaxScaler-scaler-fit-data-scaler-transform-data"><a href="#2-scaler-MinMaxScaler-scaler-fit-data-scaler-transform-data" class="headerlink" title="2.scaler=MinMaxScaler() scaler.fit(data) scaler.transform(data)"></a>2.scaler=MinMaxScaler() scaler.fit(data) scaler.transform(data)</h3><h4 id="scaler-MinMaxScaler"><a href="#scaler-MinMaxScaler" class="headerlink" title="scaler=MinMaxScaler()"></a>scaler=MinMaxScaler()</h4>
+pd.DataFrame(data)
+  (显示)     0   1
+     0 -1.0   2
+           1 -0.5   6
+           2  0.0  10
+           3  1.0  18</code></pre><h4 id="2-利用sklearn组件-from-sklearn-preprocessing-import-MinMaxScaler"><a href="#2-利用sklearn组件-from-sklearn-preprocessing-import-MinMaxScaler" class="headerlink" title="2.利用sklearn组件(from sklearn.preprocessing import MinMaxScaler)"></a>2.利用sklearn组件(from sklearn.preprocessing import MinMaxScaler)</h4><h5 id="scaler-MinMaxScaler-a-b"><a href="#scaler-MinMaxScaler-a-b" class="headerlink" title="scaler=MinMaxScaler([a,b])"></a>scaler=MinMaxScaler([a,b])</h5><pre><code>个人理解就是生成一个代表范围的标记便于后续使用，a代表后续将要归一化时的范围的最小值，b代表最大值。若不输入[a,b]则默认为[0,1]</code></pre><h5 id="scaler-fit-data"><a href="#scaler-fit-data" class="headerlink" title="scaler.fit(data)"></a>scaler.fit(data)</h5><pre><code>该过程对输入的数据(data)进行预处理，例如计算标准差等，为后续归一化提供数据基础</code></pre><h5 id="scaler-transform-data"><a href="#scaler-transform-data" class="headerlink" title="scaler.transform(data)"></a>scaler.transform(data)</h5><p><em>注：该步骤必须在进行过scaler.fit(data)后进行</em><br>    该步骤输出归一化后的数据</p>
+<h5 id="scaler-inverse-transform-result"><a href="#scaler-inverse-transform-result" class="headerlink" title="scaler.inverse_transform(result)"></a>scaler.inverse_transform(result)</h5><pre><code>该步骤返回归一化结果所对应的归一化前的数据</code></pre><h4 id="3-利用numpy组件-import-numpy-as-np"><a href="#3-利用numpy组件-import-numpy-as-np" class="headerlink" title="3.利用numpy组件(import numpy as np)"></a>3.利用numpy组件(import numpy as np)</h4><p>#####X=np.array(data)<br>    根据data生成矩阵，用于后续numpy组件处理使用<br>#####X.min(a),X.max(a)<br>######a=0<br>    分别返回矩阵(array)每列最小、最大值<br>######a=1<br>    分别返回矩阵每行最小、最大值<br>######无参情况<br>    返回矩阵中的最小值<br>#####个人理解上来说，numpy即为利用上述工具自行编写算法进行矩阵运算进行归一化运算，相对来说更加淳朴</p>
+<h3 id="数据标准化"><a href="#数据标准化" class="headerlink" title="数据标准化"></a>数据标准化</h3>
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://unicser-tkmk.github.io/2020/07/09/week1_day4/" data-id="ckcel2uu70002rejx22cpbc44" class="article-share-link">Share</a>
+      <a data-url="https://unicser-tkmk.github.io/2020/07/09/week1_day4/" data-id="ckcem17sp0002x6jx9y7e0mtg" class="article-share-link">Share</a>
       
       
     </footer>
@@ -133,7 +140,7 @@ pd.DataFrame(data)</code></pre><p>  (显示)        0   1<br>       0 -1.0   2<b
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://unicser-tkmk.github.io/2020/07/08/week1_day3/" data-id="ckcel2uu60001rejxc6t604yc" class="article-share-link">Share</a>
+      <a data-url="https://unicser-tkmk.github.io/2020/07/08/week1_day3/" data-id="ckcem17so0001x6jxda3bhn4w" class="article-share-link">Share</a>
       
       
     </footer>
@@ -170,7 +177,7 @@ pd.DataFrame(data)</code></pre><p>  (显示)        0   1<br>       0 -1.0   2<b
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://unicser-tkmk.github.io/2020/07/07/week1_day1day2/" data-id="ckcel2uu00000rejxe6zh9nb8" class="article-share-link">Share</a>
+      <a data-url="https://unicser-tkmk.github.io/2020/07/07/week1_day1day2/" data-id="ckcem17sj0000x6jxe8wq0ouz" class="article-share-link">Share</a>
       
       
     </footer>
