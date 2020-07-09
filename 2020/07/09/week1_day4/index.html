@@ -14,8 +14,8 @@
 <meta property="og:site_name" content="Unicser&#39;s blog">
 <meta property="og:description" content="week1day4总结：按照昨日计划学习了python数据归一化、标准化、缺失值处理、处理分类型数据、连续型数据 一些知识点：归一化1.pandas.DataFrame(data)       例：     data &#x3D; [[-1, 2], [-0.5, 6], [0, 10], [1, 18]] pd.DataFrame(data)   (显示)              0   1     0">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2020-07-09T09:54:28.858Z">
-<meta property="article:modified_time" content="2020-07-09T09:54:28.858Z">
+<meta property="article:published_time" content="2020-07-09T12:53:56.282Z">
+<meta property="article:modified_time" content="2020-07-09T12:53:56.282Z">
 <meta property="article:author" content="Liu Huaqiu">
 <meta name="twitter:card" content="summary">
   
@@ -69,7 +69,7 @@
         <section id="main"><article id="post-week1_day4" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2020/07/09/week1_day4/" class="article-date">
-  <time datetime="2020-07-09T09:54:28.858Z" itemprop="datePublished">2020-07-09</time>
+  <time datetime="2020-07-09T12:53:56.282Z" itemprop="datePublished">2020-07-09</time>
 </a>
     
   </div>
@@ -98,11 +98,12 @@ pd.DataFrame(data)
            1 -0.5   6
            2  0.0  10
            3  1.0  18</code></pre><h4 id="2-利用sklearn组件-from-sklearn-preprocessing-import-MinMaxScaler"><a href="#2-利用sklearn组件-from-sklearn-preprocessing-import-MinMaxScaler" class="headerlink" title="2.利用sklearn组件(from sklearn.preprocessing import MinMaxScaler)"></a>2.利用sklearn组件(from sklearn.preprocessing import MinMaxScaler)</h4><h5 id="scaler-MinMaxScaler-a-b"><a href="#scaler-MinMaxScaler-a-b" class="headerlink" title="scaler=MinMaxScaler([a,b])"></a>scaler=MinMaxScaler([a,b])</h5><pre><code>个人理解就是生成一个代表范围的标记便于后续使用，a代表后续将要归一化时的范围的最小值，b代表最大值。若不输入[a,b]则默认为[0,1]</code></pre><h5 id="scaler-fit-data"><a href="#scaler-fit-data" class="headerlink" title="scaler.fit(data)"></a>scaler.fit(data)</h5><pre><code>该过程对输入的数据(data)进行预处理，例如计算标准差等，为后续归一化提供数据基础</code></pre><h5 id="scaler-transform-data"><a href="#scaler-transform-data" class="headerlink" title="scaler.transform(data)"></a>scaler.transform(data)</h5><p><em>注：该步骤必须在进行过scaler.fit(data)后进行</em><br>    该步骤输出归一化后的数据</p>
-<h5 id="scaler-inverse-transform-result"><a href="#scaler-inverse-transform-result" class="headerlink" title="scaler.inverse_transform(result)"></a>scaler.inverse_transform(result)</h5><pre><code>该步骤返回归一化结果所对应的归一化前的数据</code></pre><h4 id="3-利用numpy组件-import-numpy-as-np"><a href="#3-利用numpy组件-import-numpy-as-np" class="headerlink" title="3.利用numpy组件(import numpy as np)"></a>3.利用numpy组件(import numpy as np)</h4><h5 id="X-np-array-data"><a href="#X-np-array-data" class="headerlink" title="X=np.array(data)"></a>X=np.array(data)</h5><pre><code>根据data生成矩阵，用于后续numpy组件处理使用</code></pre><h5 id="X-min-a-X-max-a"><a href="#X-min-a-X-max-a" class="headerlink" title="X.min(a),X.max(a)"></a>X.min(a),X.max(a)</h5><h6 id="a-0"><a href="#a-0" class="headerlink" title="a=0"></a>a=0</h6><pre><code>分别返回矩阵(array)每列最小、最大值</code></pre><h6 id="a-1"><a href="#a-1" class="headerlink" title="a=1"></a>a=1</h6><pre><code>分别返回矩阵每行最小、最大值</code></pre><h6 id="无参情况"><a href="#无参情况" class="headerlink" title="无参情况"></a>无参情况</h6><pre><code>返回矩阵中的最小值</code></pre><h5 id="个人理解上来说，numpy即为利用上述工具自行编写算法进行矩阵运算进行归一化运算，相对来说更加淳朴"><a href="#个人理解上来说，numpy即为利用上述工具自行编写算法进行矩阵运算进行归一化运算，相对来说更加淳朴" class="headerlink" title="个人理解上来说，numpy即为利用上述工具自行编写算法进行矩阵运算进行归一化运算，相对来说更加淳朴"></a>个人理解上来说，numpy即为利用上述工具自行编写算法进行矩阵运算进行归一化运算，相对来说更加淳朴</h5><h3 id="数据标准化"><a href="#数据标准化" class="headerlink" title="数据标准化"></a>数据标准化</h3>
+<h5 id="scaler-inverse-transform-result"><a href="#scaler-inverse-transform-result" class="headerlink" title="scaler.inverse_transform(result)"></a>scaler.inverse_transform(result)</h5><pre><code>该步骤返回归一化结果所对应的归一化前的数据</code></pre><h4 id="3-利用numpy组件-import-numpy-as-np"><a href="#3-利用numpy组件-import-numpy-as-np" class="headerlink" title="3.利用numpy组件(import numpy as np)"></a>3.利用numpy组件(import numpy as np)</h4><h5 id="X-np-array-data"><a href="#X-np-array-data" class="headerlink" title="X=np.array(data)"></a>X=np.array(data)</h5><pre><code>根据data生成矩阵，用于后续numpy组件处理使用</code></pre><h5 id="X-min-a-X-max-a"><a href="#X-min-a-X-max-a" class="headerlink" title="X.min(a),X.max(a)"></a>X.min(a),X.max(a)</h5><h6 id="a-0"><a href="#a-0" class="headerlink" title="a=0"></a>a=0</h6><pre><code>分别返回矩阵(array)每列最小、最大值</code></pre><h6 id="a-1"><a href="#a-1" class="headerlink" title="a=1"></a>a=1</h6><pre><code>分别返回矩阵每行最小、最大值</code></pre><h6 id="无参情况"><a href="#无参情况" class="headerlink" title="无参情况"></a>无参情况</h6><pre><code>返回矩阵中的最小值</code></pre><h5 id="个人理解上来说，numpy即为利用上述工具自行编写算法进行矩阵运算进行归一化运算，相对来说更加淳朴"><a href="#个人理解上来说，numpy即为利用上述工具自行编写算法进行矩阵运算进行归一化运算，相对来说更加淳朴" class="headerlink" title="个人理解上来说，numpy即为利用上述工具自行编写算法进行矩阵运算进行归一化运算，相对来说更加淳朴"></a>个人理解上来说，numpy即为利用上述工具自行编写算法进行矩阵运算进行归一化运算，相对来说更加淳朴</h5><h3 id="数据标准化"><a href="#数据标准化" class="headerlink" title="数据标准化"></a>数据标准化</h3><pre><code>大体与归一化类似，但是是使用sklearn中的StandardScaler组件。除去与归一化类似部分，还可通过scaler.mean_ scaler.var_分别查看原始数据的方差，利用x_std.mean() x_std.std()分别查看导出结果的平均值和方差。</code></pre><h3 id="缺失值及处理分类型特征"><a href="#缺失值及处理分类型特征" class="headerlink" title="缺失值及处理分类型特征"></a>缺失值及处理分类型特征</h3><pre><code>内容较多。。。。感觉需要花更多时间。。。
+详见：https://blog.csdn.net/c1z2w3456789/article/details/105081271?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522159427923819725247614884%2522%252C%2522scm%2522%253A%252220140713.130102334.pc%255Fall.%2522%257D&amp;request_id=159427923819725247614884&amp;biz_id=0&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~first_rank_ecpm_v3~pc_rank_v3-2-105081271.pc_ecpm_v3_pc_rank_v3&amp;utm_term=%E2%80%A2+%E5%AE%9E%E7%8E%B0%E5%AF%B9%E6%95%B0%E6%8D%AE%E9%9B%86%E7%9A%84%E5%A4%84%E7%90%86%EF%BC%88%E5%A1%AB%E8%A1%A5%E7%BC%BA%E5%A4%B1%E5%80%BC%EF%BC%8C%E6%A0%87%E5%87%86%E5%8C%96%EF%BC%8C%E5%BD%92%E4%B8%80%E5%8C%96%EF%BC%8C%E6%95%B0%E6%8D%AE%E6%8A%BD%E6%A0%B7                </code></pre>
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://unicser-tkmk.github.io/2020/07/09/week1_day4/" data-id="ckcem71ld0002zpjx8afb0mde" class="article-share-link">Share</a>
+      <a data-url="https://unicser-tkmk.github.io/2020/07/09/week1_day4/" data-id="ckceslu710002s8jxh57z8lxf" class="article-share-link">Share</a>
       
       
     </footer>
