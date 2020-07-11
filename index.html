@@ -69,7 +69,7 @@
     <article id="post-week1_day5day6" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2020/07/11/week1_day5day6/" class="article-date">
-  <time datetime="2020-07-11T16:07:58.969Z" itemprop="datePublished">2020-07-11</time>
+  <time datetime="2020-07-11T16:11:25.038Z" itemprop="datePublished">2020-07-11</time>
 </a>
     
   </div>
@@ -89,13 +89,14 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h1 id="Week1Day5-amp-6"><a href="#Week1Day5-amp-6" class="headerlink" title="Week1Day5&amp;6"></a>Week1Day5&amp;6</h1><p><strong><em>总结：这两天主要进行了对K-mean和python——numpy的学习应用</em></strong></p>
-<h2 id="K-mean算法"><a href="#K-mean算法" class="headerlink" title="K-mean算法"></a>K-mean算法</h2><p><strong>K-mean算法是进行无标记学习时可用的一算法。用于进行样本分类。其中，我主要学习的是用L2距离标记进行计算的方法。其主要思想在于在选择初始中心点后，将每一个样本点加入离各自最近的中心点所对应的组，并依照这些组内元素，对其求平均值，得到用于下一轮计算的中心点。如此迭代，最终得到较为准确的解。<br>该算法的意义在于，由于该问题属于NP问题，故在数据量巨大时只能求近似解。而该算法属于贪心算法的一种，能够较为高效地求得近似解。</strong><br><em>由于包含内容较多，在此处不一一赘述，最终编写的代码和分析照片如下：</em><br>##代码<br>import numpy as np<br>from matplotlib import pyplot as plt<br>m=int(input(“type in the amount of datas:”))<br>n=int(input(“type in the amount of dimentions:”))<br>t=int(input(“type in the amount of types you want to divide:”))<br>amount=int(input(“type in the amount you want to count:”))<br>ms=1<br>X=(100<em>np.random.rand(1,n))<br>while(ms&lt;m):<br>    X=np.vstack((X,(100</em>np.random.rand(1,n))))<br>    ms=ms+1<br>tc=0<br>Centers=[]<br>team=[]<br>dis=[]<br>while(tc&lt;t):<br>    Centers.append([X[tc]])<br>    tc+=1<br>tc=0<br>k=0<br>while(k&lt;amount):<br>    team=[]<br>    while(tc&lt;t):<br>        team.append([np.zeros(n)])<br>        tc+=1<br>    tc=0<br>    m1=0<br>    while(m1&lt;m):<br>        while(tc&lt;t):<br>            dis.append(np.sum(np.power(X[m1]-Centers[tc],2)))<br>            tc+=1<br>        tc=0<br>        a=np.where(dis==np.min(dis))<br>        team[a[0][0]]=np.vstack((team[a[0][0]],[X[m1]]))<br>        m1+=1<br>        dis=[]<br>    Centers=[]<br>    while(tc&lt;t):<br>        Centers.append(team[tc].sum(n-2)/(team[tc].shape[0]))<br>        tc+=1<br>    tc=0<br>    tc=0                                                #[team1.sum(n-2)/(team1.shape[0]-1),team2.sum(n-2)/(team2.shape[0]-1)]<br>    k+=1<br>    print(k/amount)<br>while(tc&lt;t):<br>    team[tc]=np.delete(team[tc],0,axis=0)<br>    tc+=1<br>print(Centers)<br>teamn=[]<br>centern=[]<br>tc=0<br>while(tc&lt;t):<br>    teamn.append(np.array(team[tc]))<br>    centern.append(np.array(Centers[tc]))<br>    plt.scatter(teamn[tc][:,0],teamn[tc][:,1],10,cmap=(tc%4))<br>    plt.scatter(centern[tc][0],centern[tc][1],100,cmap=(tc%4))<br>    tc+=1<br>plt.savefig(‘test_pic.png’)<br>plt.show()&gt;</p>
-<h2 id="图片"><a href="#图片" class="headerlink" title="图片"></a>图片</h2><p><img src="blog/source/images/test_pic.jpg" alt="Alt text"></p>
+<h2 id="K-mean算法"><a href="#K-mean算法" class="headerlink" title="K-mean算法"></a>K-mean算法</h2><p><strong>K-mean算法是进行无标记学习时可用的一算法。用于进行样本分类。其中，我主要学习的是用L2距离标记进行计算的方法。其主要思想在于在选择初始中心点后，将每一个样本点加入离各自最近的中心点所对应的组，并依照这些组内元素，对其求平均值，得到用于下一轮计算的中心点。如此迭代，最终得到较为准确的解。<br>该算法的意义在于，由于该问题属于NP问题，故在数据量巨大时只能求近似解。而该算法属于贪心算法的一种，能够较为高效地求得近似解。</strong><br><em>由于包含内容较多，在此处不一一赘述，最终编写的代码和分析照片如下：</em></p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>import numpy as np<br>from matplotlib import pyplot as plt<br>m=int(input(“type in the amount of datas:”))<br>n=int(input(“type in the amount of dimentions:”))<br>t=int(input(“type in the amount of types you want to divide:”))<br>amount=int(input(“type in the amount you want to count:”))<br>ms=1<br>X=(100<em>np.random.rand(1,n))<br>while(ms&lt;m):<br>    X=np.vstack((X,(100</em>np.random.rand(1,n))))<br>    ms=ms+1<br>tc=0<br>Centers=[]<br>team=[]<br>dis=[]<br>while(tc&lt;t):<br>    Centers.append([X[tc]])<br>    tc+=1<br>tc=0<br>k=0<br>while(k&lt;amount):<br>    team=[]<br>    while(tc&lt;t):<br>        team.append([np.zeros(n)])<br>        tc+=1<br>    tc=0<br>    m1=0<br>    while(m1&lt;m):<br>        while(tc&lt;t):<br>            dis.append(np.sum(np.power(X[m1]-Centers[tc],2)))<br>            tc+=1<br>        tc=0<br>        a=np.where(dis==np.min(dis))<br>        team[a[0][0]]=np.vstack((team[a[0][0]],[X[m1]]))<br>        m1+=1<br>        dis=[]<br>    Centers=[]<br>    while(tc&lt;t):<br>        Centers.append(team[tc].sum(n-2)/(team[tc].shape[0]))<br>        tc+=1<br>    tc=0<br>    tc=0                                                #[team1.sum(n-2)/(team1.shape[0]-1),team2.sum(n-2)/(team2.shape[0]-1)]<br>    k+=1<br>    print(k/amount)<br>while(tc&lt;t):<br>    team[tc]=np.delete(team[tc],0,axis=0)<br>    tc+=1<br>print(Centers)<br>teamn=[]<br>centern=[]<br>tc=0<br>while(tc&lt;t):<br>    teamn.append(np.array(team[tc]))<br>    centern.append(np.array(Centers[tc]))<br>    plt.scatter(teamn[tc][:,0],teamn[tc][:,1],10,cmap=(tc%4))<br>    plt.scatter(centern[tc][0],centern[tc][1],100,cmap=(tc%4))<br>    tc+=1<br>plt.savefig(‘test_pic.png’)<br>plt.show()&gt;</p>
+<h2 id="实测图片"><a href="#实测图片" class="headerlink" title="实测图片"></a>实测图片</h2><p><img src="/root/blog/source/images/test_pic.jpg" alt="Alt text"></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://unicser-tkmk.github.io/2020/07/11/week1_day5day6/" data-id="ckchuf3at0003b1jx16su18q4" class="article-share-link">Share</a>
+      <a data-url="https://unicser-tkmk.github.io/2020/07/11/week1_day5day6/" data-id="ckchujivt0003ehjx3vex9d9s" class="article-share-link">Share</a>
       
       
     </footer>
@@ -142,7 +143,7 @@ pd.DataFrame(data)
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://unicser-tkmk.github.io/2020/07/09/week1_day4/" data-id="ckchuf3as0002b1jx2p2ebaud" class="article-share-link">Share</a>
+      <a data-url="https://unicser-tkmk.github.io/2020/07/09/week1_day4/" data-id="ckchujivs0002ehjxg0sdcqru" class="article-share-link">Share</a>
       
       
     </footer>
@@ -179,7 +180,7 @@ pd.DataFrame(data)
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://unicser-tkmk.github.io/2020/07/08/week1_day3/" data-id="ckchuf3aq0001b1jxh9me75st" class="article-share-link">Share</a>
+      <a data-url="https://unicser-tkmk.github.io/2020/07/08/week1_day3/" data-id="ckchujivr0001ehjx4ygx1ccd" class="article-share-link">Share</a>
       
       
     </footer>
@@ -216,7 +217,7 @@ pd.DataFrame(data)
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://unicser-tkmk.github.io/2020/07/07/week1_day1day2/" data-id="ckchuf3al0000b1jx1gxhdhdy" class="article-share-link">Share</a>
+      <a data-url="https://unicser-tkmk.github.io/2020/07/07/week1_day1day2/" data-id="ckchujivm0000ehjx3ly27toc" class="article-share-link">Share</a>
       
       
     </footer>
