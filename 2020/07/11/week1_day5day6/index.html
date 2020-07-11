@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>week1_day5day6 | Unicser&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="#Week1Day5&amp;6总结：这两天主要进行了对K-mean和python——numpy的学习应用##K-mean算法K-mean算法是进行无标记学习时可用的一算法。用于进行样本分类。其中，我主要学习的是用L2距离标记进行计算的方法。其主要思想在于在选择初始中心点后，将每一个样本点加入离各自最近的中心点所对应的组，并依照这些组内元素，对其求平均值，得到用于下一轮计算的中心点。如此迭代，最终">
+<meta property="og:type" content="article">
+<meta property="og:title" content="week1_day5day6">
+<meta property="og:url" content="https://unicser-tkmk.github.io/2020/07/11/week1_day5day6/index.html">
+<meta property="og:site_name" content="Unicser&#39;s blog">
+<meta property="og:description" content="#Week1Day5&amp;6总结：这两天主要进行了对K-mean和python——numpy的学习应用##K-mean算法K-mean算法是进行无标记学习时可用的一算法。用于进行样本分类。其中，我主要学习的是用L2距离标记进行计算的方法。其主要思想在于在选择初始中心点后，将每一个样本点加入离各自最近的中心点所对应的组，并依照这些组内元素，对其求平均值，得到用于下一轮计算的中心点。如此迭代，最终">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-07-11T15:45:49.699Z">
+<meta property="article:modified_time" content="2020-07-11T15:45:49.699Z">
+<meta property="article:author" content="Liu Huaqiu">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Unicser&#39;s blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Unicser&#39;s blog</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://Unicser-tkmk.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-week1_day5day6" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/07/11/week1_day5day6/" class="article-date">
+  <time datetime="2020-07-11T15:45:49.699Z" itemprop="datePublished">2020-07-11</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      week1_day5day6
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>#Week1Day5&amp;6<br><strong><em>总结：这两天主要进行了对K-mean和python——numpy的学习应用</em></strong><br>##K-mean算法<br><em>K-mean算法是进行无标记学习时可用的一算法。用于进行样本分类。其中，我主要学习的是用L2距离标记进行计算的方法。其主要思想在于在选择初始中心点后，将每一个样本点加入离各自最近的中心点所对应的组，并依照这些组内元素，对其求平均值，得到用于下一轮计算的中心点。如此迭代，最终得到较为准确的解。<br>该算法的意义在于，由于该问题属于NP问题，故在数据量巨大时只能求近似解。而该算法属于贪心算法的一种，能够较为高效地求得近似解。</em><br><em>由于包含内容较多，在此处不一一赘述，最终编写的代码和分析照片如下：</em><br>##代码<br>import numpy as np<br>from matplotlib import pyplot as plt<br>m=int(input(“type in the amount of datas:”))<br>n=int(input(“type in the amount of dimentions:”))<br>t=int(input(“type in the amount of types you want to divide:”))<br>amount=int(input(“type in the amount you want to count:”))<br>ms=1<br>X=(100<em>np.random.rand(1,n))<br>while(ms&lt;m):<br>    X=np.vstack((X,(100</em>np.random.rand(1,n))))<br>    ms=ms+1<br>tc=0<br>Centers=[]<br>team=[]<br>dis=[]<br>while(tc&lt;t):<br>    Centers.append([X[tc]])<br>    tc+=1<br>tc=0<br>k=0<br>while(k&lt;amount):<br>    team=[]<br>    while(tc&lt;t):<br>        team.append([np.zeros(n)])<br>        tc+=1<br>    tc=0<br>    m1=0<br>    while(m1&lt;m):<br>        while(tc&lt;t):<br>            dis.append(np.sum(np.power(X[m1]-Centers[tc],2)))<br>            tc+=1<br>        tc=0<br>        a=np.where(dis==np.min(dis))<br>        team[a[0][0]]=np.vstack((team[a[0][0]],[X[m1]]))<br>        m1+=1<br>        dis=[]<br>    Centers=[]<br>    while(tc&lt;t):<br>        Centers.append(team[tc].sum(n-2)/(team[tc].shape[0]))<br>        tc+=1<br>    tc=0<br>    tc=0                                                #[team1.sum(n-2)/(team1.shape[0]-1),team2.sum(n-2)/(team2.shape[0]-1)]<br>    k+=1<br>    print(k/amount)<br>while(tc&lt;t):<br>    team[tc]=np.delete(team[tc],0,axis=0)<br>    tc+=1<br>print(Centers)<br>teamn=[]<br>centern=[]<br>tc=0<br>while(tc&lt;t):<br>    teamn.append(np.array(team[tc]))<br>    centern.append(np.array(Centers[tc]))<br>    plt.scatter(teamn[tc][:,0],teamn[tc][:,1],10,cmap=(tc%4))<br>    plt.scatter(centern[tc][0],centern[tc][1],100,cmap=(tc%4))<br>    tc+=1<br>plt.savefig(‘test_pic.png’)<br>plt.show()</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://unicser-tkmk.github.io/2020/07/11/week1_day5day6/" data-id="ckchtmmx90001ynjxbym518gl" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2020/07/09/week1_day4/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">week1_day4</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">七月 2020</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2020/07/11/week1_day5day6/">week1_day5day6</a>
+          </li>
+        
+          <li>
+            <a href="/2020/07/09/week1_day4/">week1_day4</a>
+          </li>
+        
+          <li>
+            <a href="/2020/07/08/week1_day3/">week1_day3</a>
+          </li>
+        
+          <li>
+            <a href="/2020/07/07/week1_day1day2/">week1_day1day2</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 Liu Huaqiu<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>
