@@ -66,6 +66,43 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-PCA" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/07/16/PCA/" class="article-date">
+  <time datetime="2020-07-16T15:19:45.348Z" itemprop="datePublished">2020-07-16</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/07/16/PCA/">PCA</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>import numpy as np<br>from matplotlib import pyplot as plt<br>import sympy<br>import math<br>import copy<br>from sklearn import datasets<br>from numpy import linalg as LA<br>iris=datasets.load_iris()<br>m=150<br>n=4<br>t=3<br>ms=1<br>amount=100<br>D=2                            #the ‘D’ here means the data is lowered to D dimentioned<br>X=iris.get(‘data’)<br>tc=0<br>aver=X.sum(0)/150<br>while(tc&lt;m):<br>    X[tc]=X[tc]-aver<br>    tc+=1<br>tc=1<br>xfc=X.T@X<br>print(xfc)<br>xfc_value,xfc_vect=LA.eig(xfc)<br>location=xfc_value.argsort()[::-1][0:D]<br>W=xfc_vect[location[0]]<br>while(tc&lt;D):<br>    W=np.vstack((W,xfc_vect[location[tc]]))<br>    tc+=1<br>X=(<a href="mailto:W@X.T">W@X.T</a>).T<br>print(X)<br>n=D<br>Centers=[]<br>team=[]<br>dis=[]<br>tc=0<br>while(tc&lt;t):<br>    Centers.append([X[tc]])<br>    tc+=1<br>tc=0<br>k=0<br>print(Centers)<br>while(k&lt;amount):<br>    team=[]<br>    while(tc&lt;t):<br>        team.append([np.zeros(n)])<br>        tc+=1<br>    tc=0<br>    m1=0<br>    while(m1&lt;m):<br>        while(tc&lt;t):<br>            dis.append(np.sum(np.power(X[m1]-Centers[tc],2)))<br>            tc+=1<br>        tc=0<br>        a=np.where(dis==np.min(dis))<br>        team[a[0][0]]=np.vstack((team[a[0][0]],[X[m1]]))<br>        m1+=1<br>        dis=[]<br>    Centers=[]<br>    while(tc&lt;t):<br>        Centers.append(team[tc].sum(0)/(team[tc].shape[0]))<br>        tc+=1<br>    tc=0<br>    k+=1<br>    #print(k/amount)<br>while(tc&lt;t):<br>    team[tc]=np.delete(team[tc],0,axis=0)<br>    tc+=1<br>print(Centers)<br>teamn=[]<br>centern=[]<br>tc=0<br>while(tc&lt;t):<br>    teamn.append(np.array(team[tc]))<br>    centern.append(np.array(Centers[tc]))<br>    plt.scatter(teamn[tc][:,0],teamn[tc][:,1],10,cmap=(tc%4))<br>    plt.scatter(centern[tc][0],centern[tc][1],100,cmap=(tc%4))<br>    tc+=1<br>plt.show()</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://unicser-tkmk.github.io/2020/07/16/PCA/" data-id="ckcoxwein00008xjxb7pafwbc" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-Data_operation" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2020/07/13/Data_operation/" class="article-date">
@@ -102,7 +139,7 @@ pd.DataFrame(data)
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://unicser-tkmk.github.io/2020/07/13/Data_operation/" data-id="ckck7nr4f0000fbjx55tth7qx" class="article-share-link">Share</a>
+      <a data-url="https://unicser-tkmk.github.io/2020/07/13/Data_operation/" data-id="ckcoxweis00018xjx8zwpadgr" class="article-share-link">Share</a>
       
       
     </footer>
@@ -141,7 +178,7 @@ pd.DataFrame(data)
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://unicser-tkmk.github.io/2020/07/11/K_means/" data-id="ckck7nr4k0001fbjx6fh7c54o" class="article-share-link">Share</a>
+      <a data-url="https://unicser-tkmk.github.io/2020/07/11/K_means/" data-id="ckcoxweit00028xjxcn327hus" class="article-share-link">Share</a>
       
       
     </footer>
@@ -180,6 +217,10 @@ pd.DataFrame(data)
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2020/07/16/PCA/">PCA</a>
+          </li>
         
           <li>
             <a href="/2020/07/13/Data_operation/">Data_operation</a>

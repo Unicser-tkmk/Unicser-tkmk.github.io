@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>PCA | Unicser&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="import numpy as npfrom matplotlib import pyplot as pltimport sympyimport mathimport copyfrom sklearn import datasetsfrom numpy import linalg as LAiris&#x3D;datasets.load_iris()m&#x3D;150n&#x3D;4t&#x3D;3ms&#x3D;1amount&#x3D;100D&#x3D;2">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PCA">
+<meta property="og:url" content="https://unicser-tkmk.github.io/2020/07/16/PCA/index.html">
+<meta property="og:site_name" content="Unicser&#39;s blog">
+<meta property="og:description" content="import numpy as npfrom matplotlib import pyplot as pltimport sympyimport mathimport copyfrom sklearn import datasetsfrom numpy import linalg as LAiris&#x3D;datasets.load_iris()m&#x3D;150n&#x3D;4t&#x3D;3ms&#x3D;1amount&#x3D;100D&#x3D;2">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-07-16T15:19:45.348Z">
+<meta property="article:modified_time" content="2020-07-16T15:19:45.348Z">
+<meta property="article:author" content="Liu Huaqiu">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Unicser&#39;s blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Unicser&#39;s blog</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://Unicser-tkmk.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-PCA" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/07/16/PCA/" class="article-date">
+  <time datetime="2020-07-16T15:19:45.348Z" itemprop="datePublished">2020-07-16</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      PCA
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>import numpy as np<br>from matplotlib import pyplot as plt<br>import sympy<br>import math<br>import copy<br>from sklearn import datasets<br>from numpy import linalg as LA<br>iris=datasets.load_iris()<br>m=150<br>n=4<br>t=3<br>ms=1<br>amount=100<br>D=2                            #the ‘D’ here means the data is lowered to D dimentioned<br>X=iris.get(‘data’)<br>tc=0<br>aver=X.sum(0)/150<br>while(tc&lt;m):<br>    X[tc]=X[tc]-aver<br>    tc+=1<br>tc=1<br>xfc=X.T@X<br>print(xfc)<br>xfc_value,xfc_vect=LA.eig(xfc)<br>location=xfc_value.argsort()[::-1][0:D]<br>W=xfc_vect[location[0]]<br>while(tc&lt;D):<br>    W=np.vstack((W,xfc_vect[location[tc]]))<br>    tc+=1<br>X=(<a href="mailto:W@X.T">W@X.T</a>).T<br>print(X)<br>n=D<br>Centers=[]<br>team=[]<br>dis=[]<br>tc=0<br>while(tc&lt;t):<br>    Centers.append([X[tc]])<br>    tc+=1<br>tc=0<br>k=0<br>print(Centers)<br>while(k&lt;amount):<br>    team=[]<br>    while(tc&lt;t):<br>        team.append([np.zeros(n)])<br>        tc+=1<br>    tc=0<br>    m1=0<br>    while(m1&lt;m):<br>        while(tc&lt;t):<br>            dis.append(np.sum(np.power(X[m1]-Centers[tc],2)))<br>            tc+=1<br>        tc=0<br>        a=np.where(dis==np.min(dis))<br>        team[a[0][0]]=np.vstack((team[a[0][0]],[X[m1]]))<br>        m1+=1<br>        dis=[]<br>    Centers=[]<br>    while(tc&lt;t):<br>        Centers.append(team[tc].sum(0)/(team[tc].shape[0]))<br>        tc+=1<br>    tc=0<br>    k+=1<br>    #print(k/amount)<br>while(tc&lt;t):<br>    team[tc]=np.delete(team[tc],0,axis=0)<br>    tc+=1<br>print(Centers)<br>teamn=[]<br>centern=[]<br>tc=0<br>while(tc&lt;t):<br>    teamn.append(np.array(team[tc]))<br>    centern.append(np.array(Centers[tc]))<br>    plt.scatter(teamn[tc][:,0],teamn[tc][:,1],10,cmap=(tc%4))<br>    plt.scatter(centern[tc][0],centern[tc][1],100,cmap=(tc%4))<br>    tc+=1<br>plt.show()</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://unicser-tkmk.github.io/2020/07/16/PCA/" data-id="ckcoxwein00008xjxb7pafwbc" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2020/07/13/Data_operation/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Data_operation</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">七月 2020</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2020/07/16/PCA/">PCA</a>
+          </li>
+        
+          <li>
+            <a href="/2020/07/13/Data_operation/">Data_operation</a>
+          </li>
+        
+          <li>
+            <a href="/2020/07/11/K_means/">K-means算法及numpy语法学习心得</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 Liu Huaqiu<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>
